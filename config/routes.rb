@@ -10,7 +10,8 @@ get "/jquery-5" => "pages#jquery_5"
 resources :posts do
   member do
     post "like" => "posts#like"
-    post "unlike" => "posts#unlike"  
+    post "unlike" => "posts#unlike"
+    post "toggle_flag" => "posts#toggle_flag"
   end
 end
 
