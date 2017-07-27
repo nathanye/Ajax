@@ -30,7 +30,7 @@
      url: url,
      method: 'DELETE',
      dataType: 'json', // 要求服务器回传 json
-     success: fuction(data){ // data 就是服务器回传的 JSON 资料
+     success: function(data){ // data 就是服务器回传的 JSON 资料
        $(that).closest(".panel").remove();
      }
    })
@@ -58,7 +58,7 @@
    })
 
 
-   $("#post-list").on('change', ".toggle_flag", function(){
+   $("#post-list").on('change', ".toggle-flag", function(){
        var url = $(this).data("url");
        var that = this;
 
@@ -89,16 +89,31 @@
             post: {
               category_id: $(this).val()
             }
-            },
-            beforeSend: function(){
-              $(that).after( $(' <img src="/images/ajax-loader.gif" id="ajax-loading"> ') );
-            },
-            complete: function(){
-              $("#ajax-loading").remove();
-            }
-        });
+          },
+          beforeSend: function(){
+            $(that).after( $(' <img src="/images/ajax-loader.gif" id="ajax-loading"> ') );
+          },
+          complete: function(){
+            $("#ajax-loading").remove();
+          }
       });
+    });
 
-      $(".raty").raty( { path: '/images/' } );
+     $(".raty").raty({
+       path: '/images/',
+       score: function() { return $(this).data('score'); },
+       click: function(score) {
+         var that = this;
+         $.ajax({
+           url: $(this).data("score-url"),
+           method: "POST",
+           data: { score: score },
+           dataType: "json",
+           success: function(data){
+             $(that).closest(".panel-body").find(".average-score").html( data["average_score"] );
+           }
+         })
+       }
+     });
 
 </script>
