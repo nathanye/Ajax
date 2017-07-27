@@ -88,7 +88,7 @@
           data: {
             post: {
               category_id: $(this).val()
-            }  
+            }
             },
             beforeSend: function(){
               $(that).after( $(' <img src="/images/ajax-loader.gif" id="ajax-loading"> ') );
@@ -96,10 +96,9 @@
             complete: function(){
               $("#ajax-loading").remove();
             }
-          }
         });
       });
 
-
+      $(".raty").raty( { path: '/images/' } );
 
 </script>
