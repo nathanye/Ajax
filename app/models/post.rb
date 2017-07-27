@@ -10,4 +10,6 @@ class Post < ApplicationRecord
     self.likes.where( :user_id => user.id ).first
   end
 
+  belongs_to :category, :optional => true
+
 end
